@@ -46,15 +46,17 @@ bot.on('ready', () => {
             lastTimestamp = post.data.created_utc;
             let formattedPost = null;
             if (post.data.is_self) {
-              formattedPost = `New text post in */r/${process.env.SUBREDDIT}*\n\n`;
+              formattedPost = `New text post in __/r/${process.env.SUBREDDIT}__\n\n`;
               formattedPost += `**${post.data.title}**\n`;
-              formattedPost += `${post.data.selftext.length > 253 ? post.data.selftext.slice(253).concat('...') : post.data.selftext}\n`;
-              formattedPost += `https://redd.it/${post.data.id}`;
+              if (post.data.selftext.length > 0) {
+                formattedPost += `\`\`\`${post.data.selftext.length > 253 ? post.data.selftext.slice(253).concat('...') : post.data.selftext}\`\`\`\n`;
+              }
+              formattedPost += `<https://redd.it/${post.data.id}>`;
             } else {
-              formattedPost = `New link post in */r/${process.env.SUBREDDIT}*\n\n`;
+              formattedPost = `New link post in __/r/${process.env.SUBREDDIT}__\n\n`;
               formattedPost += `**${post.data.title}**\n`;
-              formattedPost += `${post.data.url}\n`;
-              formattedPost += `https://redd.it/${post.data.id}`;
+              formattedPost += `<${post.data.url}>\n`;
+              formattedPost += `<https://redd.it/${post.data.id}>`;
             }
             bot.sendMessage(Channel, formattedPost);
             logger.info(`Sent message for new post https://redd.it/${post.data.id}`);
@@ -68,3 +70,19 @@ bot.on('ready', () => {
     });
   }, 30000);
 });
+
+function onExit() {
+  logger.info('Logging out before exiting');
+  bot.logout((error) => {
+    if (error) {
+      logger.error('Unknown error during logout', error);
+      process.exit(-1);
+    } else {
+      logger.info('Logout success');
+      process.exit(0);
+    }
+  });
+}
+
+process.on('SIGINT', onExit);
+process.on('SIGTERM', onExit);
