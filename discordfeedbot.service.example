@@ -1,6 +1,6 @@
 [Service]
 WorkingDirectory=/opt/discord-feed-bot //CHANGE THIS TO YOUR WORKING DIRECTOR
-ExecStart=/usr/bin/npm //MAKE SURE THIS IS ACCURATE
+ExecStart=/usr/bin/npm start //MAKE SURE THIS IS ACCURATE
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
