@@ -1,0 +1,12 @@
+[Service]
+WorkingDirectory=/opt/discord-feed-bot //CHANGE THIS TO YOUR WORKING DIRECTOR
+ExecStart=/usr/bin/npm //MAKE SURE THIS IS ACCURATE
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=discordfeedbot //UP TO YOU
+User=node-services //MAKE SURE THE ACCOUNT EXISTS AND THE WORKING DIRECTORY IS OWNED BY THIS USER
+Group=node-services //SEE ABOVE
+
+[Install]
+WantedBy=multi-user.target

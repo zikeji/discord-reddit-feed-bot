@@ -1,0 +1,35 @@
+{
+  "name": "discord-feed-bot",
+  "version": "1.0.0",
+  "engines": {
+    "node": "6.0.0"
+  },
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "lint": "./node_modules/.bin/eslint .",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:zikeji/discord-feed-bot.git"
+  },
+  "author": "Caleb Blankemeyer <caleb@blankemeyer.us>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://git.zynados.com/homelab/discord-feed-bot/issues"
+  },
+  "homepage": "https://www.github.com/zikeji/discord-feed-bot",
+  "dependencies": {
+    "discord.js": "^8.1.0",
+    "request": "^2.74.0 ",
+    "dotenv": "^2.0.0",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.2.0",
+    "eslint-config-airbnb-base": "^5.0.1",
+    "eslint-plugin-import": "^1.12.0"
+  }
+}
