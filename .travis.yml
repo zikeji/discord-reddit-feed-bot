@@ -1,0 +1,12 @@
+
+language: node_js
+env:
+- CXX=g++-4.7
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.7
+install: npm install
+script: npm run lint
