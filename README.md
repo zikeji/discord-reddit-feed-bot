@@ -1,4 +1,4 @@
-# discord-feed-bot
+# discord-feed-bot [![Build Status](https://travis-ci.org/zikeji/discord-feed-bot.svg?branch=master)](https://travis-ci.org/zikeji/discord-feed-bot)
 
 ### Installation
 
