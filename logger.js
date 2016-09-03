@@ -3,7 +3,7 @@
 const winston = require('winston');
 
 const logger = new winston.Logger({
-  level: process.env.LOGGING_LEVEL | 'info',
+  level: process.env.LOGGING_LEVEL || 'info',
   transports: [
     new (winston.transports.Console)(),
   ],
