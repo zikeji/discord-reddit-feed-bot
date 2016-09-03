@@ -49,7 +49,7 @@ bot.on('ready', () => {
               formattedPost = `New text post in __/r/${process.env.SUBREDDIT}__\n\n`;
               formattedPost += `**${post.data.title}**\n`;
               if (post.data.selftext.length > 0) {
-                formattedPost += `\`\`\`${post.data.selftext.length > 253 ? post.data.selftext.slice(253).concat('...') : post.data.selftext}\`\`\`\n`;
+                formattedPost += `\`\`\`${post.data.selftext.length > 253 ? post.data.selftext.slice(0,253).concat('...') : post.data.selftext}\`\`\`\n`;
               }
               formattedPost += `<https://redd.it/${post.data.id}>`;
             } else {
