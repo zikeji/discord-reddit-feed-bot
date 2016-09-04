@@ -8,20 +8,18 @@ const entities = require('entities');
 const logger = require('./logger');
 
 const bot = new Discord.Client();
-bot.loginWithToken(process.env.DISCORD_TOKEN);
+bot.login(process.env.DISCORD_TOKEN);
 logger.info('Initialized');
 
 bot.on('ready', () => {
-  bot.setStatus('online', `Spamming F5 on /r/${process.env.SUBREDDIT}`);
+  bot.user.setStatus('online', `Spamming F5 on /r/${process.env.SUBREDDIT}`).then(logger.info('Changed status!')).catch(logger.error);
   let lastTimestamp = Math.floor(Date.now() / 1000);
   let Channel = null;
-
-  for (const server of bot.servers) {
-    if (server.id === process.env.DISCORD_SERVERID) {
-      for (const channel of server.channels) {
-        if (channel.name === process.env.DISCORD_CHANNEL) {
-          Channel = channel;
-        }
+  if (bot.guilds.exists('id', process.env.DISCORD_SERVERID)) {
+    const guild = bot.guilds.find('id', process.env.DISCORD_SERVERID);
+    for (const channel of guild.channels.array()) {
+      if (channel.name === process.env.DISCORD_CHANNEL) {
+        Channel = channel;
       }
     }
   }
@@ -62,7 +60,7 @@ bot.on('ready', () => {
               formattedPost += `<https://redd.it/${post.data.id}>\n`;
             }
             formattedPost += `_ _\n_ _`;
-            bot.sendMessage(Channel, formattedPost);
+            Channel.sendMessage(formattedPost);
             logger.info(`Sent message for new post https://redd.it/${post.data.id}`);
           }
         }
@@ -77,7 +75,7 @@ bot.on('ready', () => {
 
 function onExit() {
   logger.info('Logging out before exiting');
-  bot.logout((error) => {
+  bot.destroy().then(error => {
     if (error) {
       logger.error('Unknown error during logout', error);
       process.exit(-1);
