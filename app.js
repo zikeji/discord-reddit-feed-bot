@@ -17,7 +17,7 @@ bot.on('ready', () => {
   let Channel = null;
   if (bot.guilds.exists('id', process.env.DISCORD_SERVERID)) {
     const guild = bot.guilds.find('id', process.env.DISCORD_SERVERID);
-    for (const channel of guild.channels.array()) {
+    for (const channel of guild.channels.values()) {
       if (channel.name === process.env.DISCORD_CHANNEL) {
         Channel = channel;
       }
