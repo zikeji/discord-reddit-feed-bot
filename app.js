@@ -45,7 +45,7 @@ bot.on('ready', () => {
         for (const post of body.data.children.reverse()) {
           if (lastTimestamp <= post.data.created_utc) {
             lastTimestamp = post.data.created_utc;
-            let formattedPost = ``;
+            let formattedPost = '';
             const postTitle = entities.decodeHTML(post.data.title);
             if (post.data.is_self) {
               formattedPost += `New text post in __/r/${process.env.SUBREDDIT}__\n\n`;
