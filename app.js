@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const Discord = require('discord.js');
 const request = require('request');
+const entities = require('entities');
 const logger = require('./logger');
 
 const bot = new Discord.Client();
@@ -44,20 +45,23 @@ bot.on('ready', () => {
         for (const post of body.data.children.reverse()) {
           if (lastTimestamp <= post.data.created_utc) {
             lastTimestamp = post.data.created_utc;
-            let formattedPost = null;
+            let formattedPost = ``;
+            const postTitle = entities.decodeHTML(post.data.title);
             if (post.data.is_self) {
-              formattedPost = `New text post in __/r/${process.env.SUBREDDIT}__\n\n`;
-              formattedPost += `**${post.data.title}**\n`;
+              formattedPost += `New text post in __/r/${process.env.SUBREDDIT}__\n\n`;
+              formattedPost += `**${postTitle}**\n`;
               if (post.data.selftext.length > 0) {
-                formattedPost += `\`\`\`${post.data.selftext.length > 253 ? post.data.selftext.slice(0, 253).concat('...') : post.data.selftext}\`\`\`\n`;
+                const postSelfText = entities.decodeHTML(post.data.selftext.length > 253 ? post.data.selftext.slice(0, 253).concat('...') : post.data.selftext);
+                formattedPost += `\`\`\`${postSelfText}\`\`\`\n`;
               }
-              formattedPost += `<https://redd.it/${post.data.id}>`;
+              formattedPost += `<https://redd.it/${post.data.id}>\n`;
             } else {
-              formattedPost = `New link post in __/r/${process.env.SUBREDDIT}__\n\n`;
-              formattedPost += `**${post.data.title}**\n`;
+              formattedPost += `New link post in __/r/${process.env.SUBREDDIT}__\n\n`;
+              formattedPost += `**${postTitle}**\n`;
               formattedPost += `<${post.data.url}>\n`;
-              formattedPost += `<https://redd.it/${post.data.id}>`;
+              formattedPost += `<https://redd.it/${post.data.id}>\n`;
             }
+            formattedPost += `_ _\n_ _`;
             bot.sendMessage(Channel, formattedPost);
             logger.info(`Sent message for new post https://redd.it/${post.data.id}`);
           }
