@@ -11,10 +11,12 @@ const bot = new Discord.Client();
 bot.login(process.env.DISCORD_TOKEN);
 logger.info('Initialized');
 
+let lastTimestamp = Math.floor(Date.now() / 1000);
+let Channel = null;
+let botReady = false;
+
 bot.on('ready', () => {
   bot.user.setStatus('online', `Spamming F5 on /r/${process.env.SUBREDDIT}`).then(logger.info('Changed status!')).catch(logger.error);
-  let lastTimestamp = Math.floor(Date.now() / 1000);
-  let Channel = null;
   if (bot.guilds.exists('id', process.env.DISCORD_SERVERID)) {
     const guild = bot.guilds.find('id', process.env.DISCORD_SERVERID);
     for (const channel of guild.channels.values()) {
@@ -29,11 +31,23 @@ bot.on('ready', () => {
     process.exit(1);
   } else {
     logger.info('Ready');
+    botReady = true;
   }
+});
 
-  const subredditUrl = `https://www.reddit.com/r/${process.env.SUBREDDIT}/new.json?limit=10`;
+bot.on('error', (error) => {
+  logger.error('Connection error', error);
+  botReady = false;
+});
 
-  setInterval(() => {
+bot.on('reconnecting', () => {
+  logger.info('Reconnecting');
+});
+
+const subredditUrl = `https://www.reddit.com/r/${process.env.SUBREDDIT}/new.json?limit=10`;
+
+setInterval(() => {
+  if (botReady) {
     request({
       url: subredditUrl,
       json: true,
@@ -70,8 +84,8 @@ bot.on('ready', () => {
         logger.debug(response, body);
       }
     });
-  }, 30000);
-});
+  }
+}, 30000);
 
 function onExit() {
   logger.info('Logging out before exiting');
