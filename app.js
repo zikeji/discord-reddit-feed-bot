@@ -60,7 +60,7 @@ setInterval(() => {
             let formattedPost = '';
             const postTitle = entities.decodeHTML(post.data.title);
             if (post.data.is_self) {
-              formattedPost += `New text post in __/r/${process.env.SUBREDDIT}__\n\n`;
+              // formattedPost += `New text post in __/r/${process.env.SUBREDDIT}__\n\n`;
               formattedPost += `**${postTitle}**\n`;
               if (post.data.selftext.length > 0) {
                 const postSelfText = entities.decodeHTML(post.data.selftext.length > 253 ? post.data.selftext.slice(0, 253).concat('...') : post.data.selftext);
@@ -68,12 +68,12 @@ setInterval(() => {
               }
               formattedPost += `<https://redd.it/${post.data.id}>\n`;
             } else {
-              formattedPost += `New link post in __/r/${process.env.SUBREDDIT}__\n\n`;
+              // formattedPost += `New link post in __/r/${process.env.SUBREDDIT}__\n\n`;
               formattedPost += `**${postTitle}**\n`;
               formattedPost += `<${post.data.url}>\n`;
               formattedPost += `<https://redd.it/${post.data.id}>\n`;
             }
-            formattedPost += `_ _\n_ _`;
+            formattedPost += `_ _`;
             Channel.sendMessage(formattedPost);
             logger.info(`Sent message for new post https://redd.it/${post.data.id}`);
           }
