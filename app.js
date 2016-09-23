@@ -16,7 +16,7 @@ let Channel = null;
 let botReady = false;
 
 bot.on('ready', () => {
-  bot.user.setStatus('online', `Spamming F5 on /r/${process.env.SUBREDDIT}`).then(logger.info('Changed status!')).catch(logger.error);
+  bot.user.setStatus('online', `Spamming F5 on /r/${process.env.SUBREDDIT}`).then(logger.info('Changed status!')).catch('ready failed to change status', logger.error);
   if (bot.guilds.exists('id', process.env.DISCORD_SERVERID)) {
     const guild = bot.guilds.find('id', process.env.DISCORD_SERVERID);
     for (const channel of guild.channels.values()) {
@@ -70,10 +70,11 @@ setInterval(() => {
             } else {
               // formattedPost += `New link post in __/r/${process.env.SUBREDDIT}__\n\n`;
               formattedPost += `**${postTitle}**\n`;
-              formattedPost += `<${post.data.url}>\n`;
+              const postUrl = entities.decodeHTML(post.data.url);
+              formattedPost += `<${postUrl}>\n`;
               formattedPost += `<https://redd.it/${post.data.id}>\n`;
             }
-            formattedPost += `_ _`;
+            formattedPost += '_ _';
             Channel.sendMessage(formattedPost);
             logger.info(`Sent message for new post https://redd.it/${post.data.id}`);
           }
