@@ -15,6 +15,5 @@
 
 #### Installing as a service (Linux)
 
-If you would like to run the bot as a service, I've included a systemd example file (`discordfeedbot.service.example`). Configure it and install it as `discordfeedbot.service` to `/etc/systemd/system`.
-
-You can now run `systemctl start discordfeedbot.service` to start the bot in the background. To enable it on bootup, simply `systemctl enable discordfeedbot.service`. To review application logs, simply `journalctl -t discordfeedbot`.
+I recommend installing pm2 to run the feed bot. It can be found here: https://github.com/Unitech/pm2
+ - `pm2 start app.js --name discord-feed-bot`
