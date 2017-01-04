@@ -1,10 +1,10 @@
 {
-  "name": "discord-feed-bot",
-  "version": "1.0.0",
+  "name": "discord-reddit-feed-bot",
+  "version": "2.0.0",
   "engines": {
-    "node": "6.0.0"
+    "node": "6.9.3"
   },
-  "description": "",
+  "description": "Monitor for new links and selftexts in your Reddit sub and automatically post them to your Discord server in a specific channel.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -13,19 +13,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:zikeji/discord-feed-bot.git"
+    "url": "git@github.com:zikeji/discord-reddit-feed-bot.git"
   },
   "author": "Caleb Blankemeyer <caleb@blankemeyer.us>",
   "license": "MIT",
   "bugs": {
-    "url": "https://git.zynados.com/homelab/discord-feed-bot/issues"
+    "url": "https://github.com/zikeji/discord-reddit-feed-bot/issues"
   },
-  "homepage": "https://www.github.com/zikeji/discord-feed-bot",
+  "homepage": "https://www.github.com/zikeji/discord-reddit-feed-bot",
   "dependencies": {
-    "discord.js": "^9.0.2",
-    "request": "^2.74.0 ",
+    "discord.js": "^11.0.0",
     "dotenv": "^2.0.0",
     "entities": "^1.1.1",
+    "request": "^2.74.0 ",
+    "valid-url": "^1.0.9",
     "winston": "^2.2.0"
   },
   "devDependencies": {
