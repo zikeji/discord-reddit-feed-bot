@@ -1,5 +1,16 @@
 # discord-reddit-feed-bot [![Build Status](https://travis-ci.org/zikeji/discord-reddit-feed-bot.svg?branch=master)](https://travis-ci.org/zikeji/discord-reddit-feed-bot)
 
+**Table of Contents**
+
+    - [Installation](#installation)
+        - [Installing as a service (Linux)](#installing-as-a-service-linux)
+    - [Environment Variables](#environment-variables)
+    - [Troubleshooting](#troubleshooting)
+            - [Getting your server ID and channel ID](#getting-your-server-id-and-channel-id)
+            - [Getting your new bot into your server.](#getting-your-new-bot-into-your-server)
+            - [Error: Bad Request](#error-bad-request)
+            - [Error: Forbidden](#error-forbidden)
+
 ### Installation
 
  - `git clone https://github.com/zikeji/discord-reddit-feed-bot`
@@ -29,11 +40,11 @@ See their documentation for instructions on auto-launching apps on boot.
 
 ### Troubleshooting
 
-##### Getting your server ID and channel ID
+#### Getting your server ID and channel ID
 
 You need to enable "Developer Mode" in the Discord app. Go to your settings, then the "Appearance" section, now check "Developer Mode" and hit "done". Now you cna right click a server in your list on the right and click "Copy ID", then right click the channel in the server and hit "Copy ID" (after you've pasted the previous ID).
 
-##### Getting your new bot into your server.
+#### Getting your new bot into your server.
 
 Giving a bot permission to use your server can be a bit frustrating. You need to generate an OAuth link and use that to invite it to your server.
 
@@ -47,6 +58,10 @@ So it should look like:
 
 Then you can launch that URL (or have someone launch it) and add it to your server. You'll notice I left the permissions at "0". That's because I prefer to assign permissions manually on the server itself. So be sure to give the bot permissions to at the very least "send messages" & "embed links" on the channel.
 
-##### Error: Bad Request
+#### Error: Bad Request
 
 Incorrect permissions - please ensure the bot has the ability to `Send Messages` and `Embed Links` on the channel.
+
+#### Error: Forbidden
+
+Could be an invalid bot token, however please ensure the bot has the ability to view the channel it's posting to.
