@@ -2,14 +2,14 @@
 
 **Table of Contents**
 
-    - [Installation](#installation)
-        - [Installing as a service (Linux)](#installing-as-a-service-linux)
-    - [Environment Variables](#environment-variables)
-    - [Troubleshooting](#troubleshooting)
-            - [Getting your server ID and channel ID](#getting-your-server-id-and-channel-id)
-            - [Getting your new bot into your server.](#getting-your-new-bot-into-your-server)
-            - [Error: Bad Request](#error-bad-request)
-            - [Error: Forbidden](#error-forbidden)
+- [Installation](#installation)
+    - [Installing as a service (Linux)](#installing-as-a-service-linux)
+- [Environment Variables](#environment-variables)
+- [Troubleshooting](#troubleshooting)
+        - [Getting your server ID and channel ID](#getting-your-server-id-and-channel-id)
+        - [Getting your new bot into your server.](#getting-your-new-bot-into-your-server)
+        - [Error: Bad Request](#error-bad-request)
+        - [Error: Forbidden](#error-forbidden)
 
 ### Installation
 
